@@ -48,8 +48,7 @@ public class AanwezigWritting {
                         KeyEvent.VK_Z,
                         KeyEvent.VK_I,
                         KeyEvent.VK_G,
-                        KeyEvent.VK_SPACE,
-                        KeyEvent.VK_ENTER};
+                        KeyEvent.VK_SPACE}; // add KeyEvent.VK_ENTER in the end if you want to send the text
 
                 // Here we hold our breath for 3 seconds
                 Thread.sleep(3000);
