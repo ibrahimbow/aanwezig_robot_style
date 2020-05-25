@@ -1,70 +1,46 @@
 package be.intecbrussel.robotishere;
 
 import java.awt.event.KeyEvent;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AanwezigWritting {
 
     public static void main(String[] args) {
 
-        //This is my style :)
+
+
+        String DATE_FORMATTER = "HH:mm:ss";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER);
+        int minute=0;
+        int hour=0;
 
         FunctionsRobotTyping functionsRobotTyping = new FunctionsRobotTyping();
 
-        // "user.home" use it if you don't know the %userprofile% path
-        String path = System.getProperty("user.home");
-        String pathTeamsExe = (path + "\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe");
+        while(true) {
+            minute = LocalTime.now().getMinute();
+            hour = LocalTime.now().getHour();
 
-        // if the Teams.exe is found then let's make it work otherwise we have to leave (:
+//            System.out.print(LocalTime.now().format(formatter) + "\r");
+            // put the time to type Aanwezig on teams
+            if(hour ==9 && minute ==9 ){
 
-            try {
-                if(functionsRobotTyping.checkIfExist(pathTeamsExe)) {
-                // lets run,open or start the Teams.exe with this processBuilder.Start and Runtime.exec methods
-                Process processObj = Runtime.getRuntime().exec("cmd /c start /wait " + pathTeamsExe);
-                processObj.waitFor(); // Thanks for waiting ;)
-
-                // This is array of keycode in order to type: row call
-                // we made it like this to make easy to read
-                int[] row_call = {
-                        KeyEvent.VK_R,
-                        KeyEvent.VK_O,
-                        KeyEvent.VK_W,
-                        KeyEvent.VK_SPACE,
-                        KeyEvent.VK_C,
-                        KeyEvent.VK_A,
-                        KeyEvent.VK_L,
-                        KeyEvent.VK_L,
-                        KeyEvent.VK_DOWN,
-                        KeyEvent.VK_DOWN,
-                        KeyEvent.VK_DOWN,
-                        KeyEvent.VK_ENTER};
-
-                // This array to type (Aanwezig) inside the application and send
-                int[] writeAanwezig = {
-                        KeyEvent.VK_A,
-                        KeyEvent.VK_A,
-                        KeyEvent.VK_N,
-                        KeyEvent.VK_W,
-                        KeyEvent.VK_E,
-                        KeyEvent.VK_Z,
-                        KeyEvent.VK_I,
-                        KeyEvent.VK_G,
-                        KeyEvent.VK_SPACE}; // add KeyEvent.VK_ENTER in the end if you want to send the text
-
-                // Here we hold our breath for 3 seconds
-                Thread.sleep(3000);
-
-                //First we execute this method to reach the right place
-                functionsRobotTyping.execute(row_call);
-
-                Thread.sleep(3000);
-                // then we use this method to type (AANWIZEG)
-                functionsRobotTyping.typeIt(writeAanwezig);
-
-                }else {
-                    System.out.println("Teams.exe is not found.. Spijtig genoeg..!");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+                functionsRobotTyping.action();
+                break;
             }
+
+        }
+
+
+
+
+
+
+
     }
 }
