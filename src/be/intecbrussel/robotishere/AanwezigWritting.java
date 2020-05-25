@@ -17,30 +17,27 @@ public class AanwezigWritting {
 
         String DATE_FORMATTER = "HH:mm:ss";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER);
+
         int minute=0;
         int hour=0;
 
         FunctionsRobotTyping functionsRobotTyping = new FunctionsRobotTyping();
+        // run the robot type without timer
+//        functionsRobotTyping.action();
 
         while(true) {
             minute = LocalTime.now().getMinute();
             hour = LocalTime.now().getHour();
 
-//            System.out.print(LocalTime.now().format(formatter) + "\r");
+            // to see the Timer
+            //System.out.print(LocalTime.now().format(formatter) + "\r");
             // put the time to type Aanwezig on teams
             if(hour ==9 && minute ==9 ){
 
                 functionsRobotTyping.action();
                 break;
             }
-
         }
-
-
-
-
-
-
 
     }
 }
